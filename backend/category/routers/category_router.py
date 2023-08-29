@@ -30,7 +30,6 @@ def list_categories(db: Session = Depends(get_db)) -> list[CategoryResponse]:
 @router.post("", response_model=CategoryResponse, status_code=201)
 def create_category(category_request: CategoryRequest,
                     db: Session = Depends(get_db)) -> CategoryResponse:
-
     category = Category(
         **category_request.model_dump()
     )
