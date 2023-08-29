@@ -43,6 +43,21 @@ def test_must_list_categories():
     ]
 
 
+def test_must_get_one_category():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response = client.post("/categories", json={
+        "description": "Ferramentas"
+    })
+
+    id_category = response.json()['id']
+
+    response_get = client.get(f"/categories/{id_category}")
+    assert response_get.status_code == 200
+    assert response_get.json()['description'] == "Ferramentas"
+
+
 def test_must_create_category():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -56,6 +71,37 @@ def test_must_create_category():
     response = client.post("/categories", json=new_category)
     assert response.status_code == 201
     assert response.json() == new_category_copy
+
+
+def test_must_update_category():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response = client.post("/categories", json={
+        "description": "Ferramentas"
+    })
+
+    id_category = response.json()['id']
+
+    response_put = client.put(f"/categories/{id_category}", json={
+        "description": "Ferragens"
+    })
+    assert response_put.status_code == 200
+    assert response_put.json()['description'] == "Ferragens"
+
+
+def test_must_delete_category():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response = client.post("/categories", json={
+        "description": "Ferramentas"
+    })
+
+    id_category = response.json()['id']
+
+    response_put = client.delete(f"/categories/{id_category}")
+    assert response_put.status_code == 204
 
 
 def test_must_return_error_when_exceed_description():
