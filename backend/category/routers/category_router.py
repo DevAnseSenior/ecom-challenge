@@ -1,7 +1,7 @@
 from typing import List, Type
 
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from category.models.category_model import Category
@@ -19,11 +19,11 @@ class CategoryResponse(BaseModel):
 
 
 class CategoryRequest(BaseModel):
-    description: str
+    description: str = Field(min_length=3, max_length=30)
 
 
 @router.get("", response_model=List[CategoryResponse])
-def list_categories(db: Session = Depends(get_db)) -> list[CategoryResponse]:
+def list_categories(db: Session = Depends(get_db)) -> list[Type[Category]]:
     return db.query(Category).all()
 
 
