@@ -1,11 +1,12 @@
 from typing import List, Type
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from category.models.category_model import Category
 from shared.dependencies import get_db
+from shared.exceptions import NotFound
 
 router = APIRouter(prefix="/categories")
 
@@ -30,8 +31,8 @@ def list_categories(db: Session = Depends(get_db)) -> list[Type[Category]]:
 @router.get("/{id_category}", response_model=CategoryResponse)
 def get_category(id_category: int,
                  db: Session = Depends(get_db)) -> list[Type[Category]]:
-    category: Category = db.query(Category).get(id_category)
-    return category
+
+    return find_category_by_id(id_category, db)
 
 
 @router.post("", response_model=CategoryResponse, status_code=201)
@@ -52,7 +53,7 @@ def create_category(category_request: CategoryRequest,
 def update_category(id_category: int,
                     category_request: CategoryRequest,
                     db: Session = Depends(get_db)) -> CategoryResponse:
-    category = db.query(Category).get(id_category)
+    category = find_category_by_id(id_category, db)
     category.description = category_request.description
 
     db.add(category)
@@ -64,6 +65,14 @@ def update_category(id_category: int,
 @router.delete("/{id_category}", status_code=204)
 def delete_category(id_category: int,
                     db: Session = Depends(get_db)) -> None:
-    category = db.query(Category).get(id_category)
+    category = find_category_by_id(id_category, db)
     db.delete(category)
     db.commit()
+
+
+def find_category_by_id(id_category: int, db: Session) -> Category:
+    category = db.query(Category).get(id_category)
+    if category is None:
+        raise NotFound("Category")
+
+    return category

@@ -58,6 +58,14 @@ def test_must_get_one_category():
     assert response_get.json()['description'] == "Ferramentas"
 
 
+def test_must_return_not_found_for_not_exist_id():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response_get = client.get(f"/categories/100")
+    assert response_get.status_code == 404
+
+
 def test_must_create_category():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -90,6 +98,17 @@ def test_must_update_category():
     assert response_put.json()['description'] == "Ferragens"
 
 
+def test_must_return_not_found_for_not_exist_id_on_update():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response_put = client.put(f"/categories/100", json={
+        "description": "Ferragens"
+    })
+
+    assert response_put.status_code == 404
+
+
 def test_must_delete_category():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -102,6 +121,15 @@ def test_must_delete_category():
 
     response_put = client.delete(f"/categories/{id_category}")
     assert response_put.status_code == 204
+
+
+def test_must_return_not_found_for_not_exist_id_on_delete():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response_put = client.delete(f"/categories/100")
+
+    assert response_put.status_code == 404
 
 
 def test_must_return_error_when_exceed_description():
