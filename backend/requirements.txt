@@ -4,6 +4,7 @@ requests==2.28.2
 httpx==0.24.1
 SQLAlchemy==2.0.20
 psycopg2-binary==2.9.7
+passlib==1.7.4
 
 # TESTS
 pytest==7.4.0
