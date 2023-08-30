@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from category.routers import category_router
+from category.routers import category_router, product_router
 from shared.exceptions import NotFound
 from shared.exceptions_handler import not_found_exception_handler
 
@@ -15,6 +15,7 @@ def read_root():
 
 
 app.include_router(category_router.router)
+app.include_router(product_router.router)
 app.add_exception_handler(NotFound, not_found_exception_handler)
 
 if __name__ == "__main__":

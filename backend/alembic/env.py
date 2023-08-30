@@ -19,6 +19,9 @@ if config.config_file_name is not None:
 # noinspection PyUnresolvedReferences
 from category.models.category_model import Category
 
+# noinspection PyUnresolvedReferences
+from category.models.product_model import Product
+
 from shared.database import Base
 target_metadata = Base.metadata
 
