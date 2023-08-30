@@ -43,7 +43,7 @@ def get_user(id_user: int,
     return find_user_by_id(id_user, db)
 
 
-@router.post("/register/", response_model=UserResponse, status_code=201)
+@router.post("/register", response_model=UserResponse, status_code=201)
 def register_user(user_request: UserRequest,
                   db: Session = Depends(get_db)) -> UserResponse:
     hashed_password = password_context.hash(user_request.hashed_password)
