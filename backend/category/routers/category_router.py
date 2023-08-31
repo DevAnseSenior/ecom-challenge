@@ -24,13 +24,13 @@ class CategoryRequest(BaseModel):
 
 
 @router.get("", response_model=List[CategoryResponse])
-def list_categories(db: Session = Depends(get_db)) -> list[Type[Category]]:
+def list_categories(db: Session = Depends(get_db)) -> List[Category]:
     return db.query(Category).all()
 
 
 @router.get("/{id_category}", response_model=CategoryResponse)
 def get_category(id_category: int,
-                 db: Session = Depends(get_db)) -> list[Type[Category]]:
+                 db: Session = Depends(get_db)) -> List[Category]:
 
     return find_category_by_id(id_category, db)
 

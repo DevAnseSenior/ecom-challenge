@@ -1,12 +1,11 @@
-from typing import List, Type
-
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, Field
-from sqlalchemy.orm import Session
+from typing import List
 
 from category.models.user_model import User, password_context
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel, Field
 from shared.dependencies import get_db
 from shared.exceptions import NotFound
+from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/users")
 
@@ -33,13 +32,13 @@ class UserRequest(BaseModel):
 
 
 @router.get("", response_model=List[UserResponse])
-def list_users(db: Session = Depends(get_db)) -> list[Type[User]]:
+def list_users(db: Session = Depends(get_db)) -> List[User]:
     return db.query(User).all()
 
 
 @router.get("/{id_user}", response_model=UserResponse)
 def get_user(id_user: int,
-             db: Session = Depends(get_db)) -> list[Type[User]]:
+             db: Session = Depends(get_db)) -> List[User]:
     return find_user_by_id(id_user, db)
 
 
@@ -96,4 +95,4 @@ def login(user_login: UserLogin, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == user_login.username).first()
     if not user or not password_context.verify(user_login.hashed_password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    return {"message": "Logged in sucessfully"}
+    return {"message": "Logged in sucessfull"}
