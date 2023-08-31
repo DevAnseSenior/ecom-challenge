@@ -13,3 +13,5 @@ class Product(Base):
 
     category_id = Column(Integer, ForeignKey("categories.id"))
     category = relationship("Category")
+    owner_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User")
