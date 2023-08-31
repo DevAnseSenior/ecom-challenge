@@ -34,13 +34,13 @@ class ProductRequest(BaseModel):
 
 
 @router.get("", response_model=List[ProductResponse])
-def list_products(db: Session = Depends(get_db)) -> list[Type[Product]]:
+def list_products(db: Session = Depends(get_db)) -> List[Product]:
     return db.query(Product).all()
 
 
 @router.get("/{id_product}", response_model=ProductResponse)
 def get_product(id_product: int,
-                db: Session = Depends(get_db)) -> list[Type[Product]]:
+                db: Session = Depends(get_db)) -> List[Product]:
     return find_product_by_id(id_product, db)
 
 
