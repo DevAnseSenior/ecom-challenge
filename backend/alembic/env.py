@@ -22,6 +22,9 @@ from category.models.category_model import Category
 # noinspection PyUnresolvedReferences
 from category.models.product_model import Product
 
+# noinspection PyUnresolvedReferences
+from category.models.user_model import User
+
 from shared.database import Base
 target_metadata = Base.metadata
 
