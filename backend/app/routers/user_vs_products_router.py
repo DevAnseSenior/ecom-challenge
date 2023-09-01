@@ -1,6 +1,6 @@
 from typing import List
 
-from category.routers.product_router import ProductResponse, Product
+from app.routers.product_router import ProductResponse, Product
 from fastapi import APIRouter, Depends
 from shared.dependencies import get_db
 from sqlalchemy.orm import Session

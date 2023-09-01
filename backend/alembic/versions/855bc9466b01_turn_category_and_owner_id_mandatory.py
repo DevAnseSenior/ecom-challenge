@@ -1,4 +1,4 @@
-"""turn category and owner id mandatory
+"""turn app and owner id mandatory
 
 Revision ID: 855bc9466b01
 Revises: b44cf501faa1

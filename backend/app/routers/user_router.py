@@ -1,6 +1,6 @@
 from typing import List
 
-from category.models.user_model import User, password_context
+from app.models.user_model import User, password_context
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from shared.dependencies import get_db
