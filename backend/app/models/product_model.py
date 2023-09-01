@@ -14,5 +14,5 @@ class Product(Base):
 
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     category = relationship("Category")
-    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    owner_id = Column(Integer, ForeignKey("users.id"), unique=True, nullable=False)
     user = relationship("User")

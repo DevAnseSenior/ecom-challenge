@@ -17,16 +17,21 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # noinspection PyUnresolvedReferences
-from category.models.category_model import Category
+from app.models.category_model import Category
 
 # noinspection PyUnresolvedReferences
-from category.models.product_model import Product
+from app.models.product_model import Product
 
 # noinspection PyUnresolvedReferences
-from category.models.user_model import User
+from app.models.user_model import User
+
+# noinspection PyUnresolvedReferences
+from app.models.sales_model import Sale
 
 from shared.database import Base
+
 target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

@@ -1,4 +1,4 @@
-"""create relationship between product and category
+"""create relationship between product and app
 
 Revision ID: 5276e3b15cca
 Revises: b79d7370e101

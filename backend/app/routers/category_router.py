@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from category.models.category_model import Category
+from app.models.category_model import Category
 from shared.dependencies import get_db
 from shared.exceptions import NotFound
 

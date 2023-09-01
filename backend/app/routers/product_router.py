@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from category.models.category_model import Category
-from category.models.product_model import Product
-from category.models.user_model import User
+from app.models.category_model import Category
+from app.models.product_model import Product
+from app.models.user_model import User
 from shared.dependencies import get_db
 from shared.exceptions import NotFound
 
