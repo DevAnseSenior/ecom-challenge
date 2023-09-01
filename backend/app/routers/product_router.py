@@ -47,7 +47,6 @@ def get_product(id_product: int,
 @router.post("", response_model=ProductResponse, status_code=201)
 def create_product(product_request: ProductRequest,
                    db: Session = Depends(get_db)) -> ProductResponse:
-
     validate_owner(db, product_request.owner_id)
     validate_category(db, product_request.category_id)
 
@@ -66,7 +65,6 @@ def create_product(product_request: ProductRequest,
 def update_product(id_product: int,
                    product_request: ProductRequest,
                    db: Session = Depends(get_db)) -> ProductResponse:
-
     validate_owner(db, product_request.owner_id)
     validate_category(db, product_request.category_id)
 
@@ -96,6 +94,14 @@ def find_product_by_id(id_product: int, db: Session) -> Product:
 
     return product
 
+
+def update_quantity(id_product: int, sale_quantity: int, db: Session):
+    product = find_product_by_id(id_product, db)
+    product.quantity -= sale_quantity
+
+    db.add(product)
+    db.commit()
+    db.refresh(product)
 
 def validate_owner(db, owner_id):
     if owner_id is not None:
