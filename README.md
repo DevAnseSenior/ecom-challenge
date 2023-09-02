@@ -62,12 +62,11 @@ First, download or clone this repository to your preferred directory.
 
   
 
-  **PS**: *Don't forget to replace the { dbname } and { db_password } fields, which are the same used in the execution of the **PostgreSQL** container. Para obter o { postgre_IPAddress } utilize o seguinte comando:*
+  **PS**: *Don't forget to replace the { dbname } and { db_password } fields, which are the same used in the execution of the **PostgreSQL** container. To get the { postgre_IPAddress } use the following command:
 
   ```shell
   docker ps # To get PostgreSQL container identifier
-  docker inspect 74c3 | grep IPAddress
+  docker inspect { container_identifier } | grep IPAddress
   ```
 
-
-
+​		With the API running, it will be possible to use the endpoints through the url: http://0.0.0.0/docs
