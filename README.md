@@ -4,8 +4,6 @@
 
 This project aims to develop an API to manage sales/inventory of an e-commerce, which will be consumed by an Angular application.
 
-Developed as a challenge for the position of Fullstack developer at IATECAM company.
-
 ## Requirements
 
 I decided to use docker to facilitate the execution of the API. You can get installation details for your operating system through the following link: https://docs.docker.com/get-docker/
